@@ -1,0 +1,30 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <h1 class="mr-5">
+            <a routerLink="/home">
+                <img src="92817_champagne.ico" width="30" height="30" alt="logo">
+            </a>
+        </h1>
+        <div fxShow="true" fxHide.lt-md="true">
+            <mat-nav-list fxLayout="row">
+                <mat-list-item *ngFor="let item of navItems" class="mr-2">
+                    <a mat-button routerLink="/category/{{ item.name }}"> {{ item.name }}</a>
+                </mat-list-item>
+            </mat-nav-list>
+        </div>
+        <div fxShow="true" fxHide.gt-sm="true">
+            <a mat-icon-button [matMenuTriggerFor]="appMenu">
+                <mat-icon>more_vert</mat-icon>
+            </a>
+            <mat-menu #appMenu="matMenu" >
+                    <a mat-menu-item mat-button *ngFor="let item of navItems" routerLink="/category/{{ item.name }}">{{ item.name }}</a>
+            </mat-menu>
+        </div>
+        <span class="fill-space"></span>
+        <div fxLayoutAlign="end">
+            <a routerLink="/home">
+                <mat-icon>person</mat-icon>Login
+            </a>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
