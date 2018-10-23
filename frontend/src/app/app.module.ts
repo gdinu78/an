@@ -12,13 +12,12 @@ import { AgmCoreModule } from '@agm/core';
 import { GglplcsComponent } from './gglplcs/gglplcs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { InfiniteScrollerDirective } from './infinite-scroller.directive';
 import {
     MatSliderModule, MatSlideToggleModule, MatCheckboxModule, MatFormFieldModule,
     MatInputModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatListModule,
-    MatMenuModule
+    MatMenuModule, MatButtonModule, MatGridListModule
 } from "@angular/material";
 
 
@@ -55,6 +54,7 @@ import {
     MatCheckboxModule,
     MatGridListModule,
     MatMenuModule,
+    MatButtonModule,
     BrowserAnimationsModule
   ],
   providers: [],

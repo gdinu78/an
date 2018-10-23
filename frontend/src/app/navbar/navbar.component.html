@@ -8,7 +8,7 @@
         <div fxShow="true" fxHide.lt-md="true">
             <mat-nav-list fxLayout="row">
                 <mat-list-item *ngFor="let item of navItems" class="mr-2">
-                    <a mat-button routerLink="/category/{{ item.name }}"> {{ item.name }}</a>
+                    <a routerLink="/category/{{ item.name }}"> {{ item.name }}</a>
                 </mat-list-item>
             </mat-nav-list>
         </div>
@@ -17,7 +17,7 @@
                 <mat-icon>more_vert</mat-icon>
             </a>
             <mat-menu #appMenu="matMenu" >
-                    <a mat-menu-item mat-button *ngFor="let item of navItems" routerLink="/category/{{ item.name }}">{{ item.name }}</a>
+                    <a mat-menu-item  *ngFor="let item of navItems" routerLink="/category/{{ item.name }}">{{ item.name }}</a>
             </mat-menu>
         </div>
         <span class="fill-space"></span>

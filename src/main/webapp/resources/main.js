@@ -149,17 +149,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _gglplcs_gglplcs_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./gglplcs/gglplcs.component */ "./src/app/gglplcs/gglplcs.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material/grid-list */ "./node_modules/@angular/material/esm5/grid-list.es5.js");
-/* harmony import */ var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/flex-layout */ "./node_modules/@angular/flex-layout/esm5/flex-layout.es5.js");
-/* harmony import */ var _infinite_scroller_directive__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./infinite-scroller.directive */ "./src/app/infinite-scroller.directive.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/flex-layout */ "./node_modules/@angular/flex-layout/esm5/flex-layout.es5.js");
+/* harmony import */ var _infinite_scroller_directive__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./infinite-scroller.directive */ "./src/app/infinite-scroller.directive.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -190,7 +188,7 @@ var AppModule = /** @class */ (function () {
                 _categories_categories_component__WEBPACK_IMPORTED_MODULE_7__["CategoriesComponent"],
                 _categories_searchfrm_searchfrm_component__WEBPACK_IMPORTED_MODULE_9__["SearchfrmComponent"],
                 _gglplcs_gglplcs_component__WEBPACK_IMPORTED_MODULE_11__["GglplcsComponent"],
-                _infinite_scroller_directive__WEBPACK_IMPORTED_MODULE_16__["InfiniteScrollerDirective"]
+                _infinite_scroller_directive__WEBPACK_IMPORTED_MODULE_15__["InfiniteScrollerDirective"]
             ],
             imports: [
                 _agm_core__WEBPACK_IMPORTED_MODULE_10__["AgmCoreModule"].forRoot({
@@ -202,18 +200,19 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_12__["ReactiveFormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"],
-                _angular_flex_layout__WEBPACK_IMPORTED_MODULE_15__["FlexLayoutModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatSliderModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatIconModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatSlideToggleModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatToolbarModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatListModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatSidenavModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatFormFieldModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatInputModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatCheckboxModule"],
-                _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_14__["MatGridListModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_17__["MatMenuModule"],
+                _angular_flex_layout__WEBPACK_IMPORTED_MODULE_14__["FlexLayoutModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatSliderModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatIconModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatSlideToggleModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatToolbarModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatListModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatSidenavModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatCheckboxModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatGridListModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatMenuModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatButtonModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_13__["BrowserAnimationsModule"]
             ],
             providers: [],
