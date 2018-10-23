@@ -28,7 +28,6 @@
 //     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 // }
 
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 @media (min-width: 1200px) {
     .navbar,
@@ -106,6 +105,17 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.img-mdl{
+    position: absolute;
+    color: #fff;
+    text-align: center;
+    left: 0;
+    right: 0;
+    top: 25%;
+    letter-spacing: 3px;
+}
+
+
 
 //from Bootstrap 4
 
