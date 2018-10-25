@@ -26,7 +26,7 @@ public class UsersDetails {
     private Ethnicity ethnicity;
     private HairColor hairColor;
     private Occupation occupation;
-    private Eduation education;
+    private Education education;
     private Relationship relationship;
     private int children;
     private Smoking smoking;
@@ -213,11 +213,11 @@ public class UsersDetails {
         this.occupation = occupation;
     }
 
-    public Eduation getEducation() {
+    public Education getEducation() {
         return education;
     }
 
-    public void setEducation(Eduation education) {
+    public void setEducation(Education education) {
         this.education = education;
     }
 

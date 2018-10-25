@@ -1,11 +1,11 @@
 package com.social.enums;
 
 public enum LifeCycle {
-    CREATED("CREATED"),
-    APPROVED("APPROVED"),
-    SILVER("SILVER"),
-    GOLD("GOLD"),
-    DELETED("DELETED");
+    CREATED("Created"),
+    APPROVED("Approved"),
+    SILVER("Silver"),
+    GOLD("Gold"),
+    DELETED("Deleted");
 
     private String type;
 

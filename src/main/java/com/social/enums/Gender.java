@@ -1,8 +1,8 @@
 package com.social.enums;
 
 public enum Gender {
-    MALE("MALE"),
-    FEMALE("FEMALE");
+    MALE("Male"),
+    FEMALE("Female");
 
     private String type;
 
