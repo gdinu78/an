@@ -14,7 +14,7 @@
         }
       },
       "architect": {
-        "build": {ng serve
+        "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "../src/main/webapp/resources",
