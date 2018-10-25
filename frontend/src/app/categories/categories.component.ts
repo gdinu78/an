@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {SupplierRespModel} from "./supplierResp.model";
+import {SupplierRespModel} from "../_models";
 
 @Component({
   selector: 'app-categories',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavItemModel } from './navitem.model';
-import { NavbarService } from './navbar.service';
+import { NavItemModel } from '../_models';
+import { NavbarService } from '../_services';
 
 
 @Component({

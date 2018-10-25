@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http'
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http'
 import {Observable, throwError} from 'rxjs';
-import {SupplierModel} from "../supplier.model";
-import {SupplierRespModel} from "../supplierResp.model";
+import {SupplierModel} from "../_models";
+import {SupplierRespModel} from "../_models";
 import {map} from "rxjs/internal/operators";
 import {catchError} from "rxjs/operators";
 

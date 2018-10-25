@@ -1,24 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
-import { HomeComponent } from './home/home.component';
-import { CategoriesComponent } from './categories/categories.component';
+import { NavbarComponent } from './navbar';
+import { FooterComponent } from './footer';
+import { HomeComponent } from './home';
+import { CategoriesComponent } from './categories';
 import { AppRoutingModule } from './app-routing.module';
-import { SearchfrmComponent } from './categories/searchfrm/searchfrm.component';
+import { SearchfrmComponent } from './categories/searchfrm';
 import { AgmCoreModule } from '@agm/core';
-import { GglplcsComponent } from './gglplcs/gglplcs.component';
+import { GglplcsComponent } from './gglplcs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { InfiniteScrollerDirective } from './infinite-scroller.directive';
+import { InfiniteScrollerDirective } from './_directives';
 import {
     MatSliderModule, MatSlideToggleModule, MatCheckboxModule, MatFormFieldModule,
     MatInputModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatListModule,
     MatMenuModule, MatButtonModule, MatGridListModule
 } from "@angular/material";
+import { LoginComponent } from './login';
+import {fakeBackendProvider} from "./_helpers/fake-backend";
+import {ErrorInterceptor} from "./_helpers";
+import {JwtInterceptor} from "./_helpers";
 
 
 @NgModule({
@@ -30,7 +34,8 @@ import {
     CategoriesComponent,
     SearchfrmComponent,
     GglplcsComponent,
-    InfiniteScrollerDirective
+    InfiniteScrollerDirective,
+    LoginComponent
   ],
   imports: [
       AgmCoreModule.forRoot({
@@ -57,7 +62,13 @@ import {
     MatButtonModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

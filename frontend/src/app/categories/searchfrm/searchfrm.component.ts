@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {SupplierModel} from "../supplier.model";
-import {SearchfrmService} from "./searchfrm.service";
-import {SupplierRespModel} from "../supplierResp.model";
+import {SupplierModel} from "../../_models/supplier.model";
+import {SearchfrmService} from "../../_services/searchfrm.service";
+import {SupplierRespModel} from "../../_models/supplierResp.model";
 
 @Component({
   selector: 'app-searchfrm',

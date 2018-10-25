@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http'
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import {NavitemRespModel} from "./navitemResp.model";
-import {NavItemModel} from "./navitem.model";
+import {NavitemRespModel} from "../_models";
+import {NavItemModel} from "../_models";
 
 //.pipe(map(...))
 

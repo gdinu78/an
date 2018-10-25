@@ -1,8 +1,9 @@
 package com.social.model;
 
-import com.social.enums.LifeCycle;
+import com.social.enums.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
@@ -11,27 +12,26 @@ import java.util.Set;
 public class UsersDetails {
     private int usersDetailsId;
     private Users user;
-    private ZonedDateTime memeberSince;
+    private ZonedDateTime memberSince;
     private ZonedDateTime lastActive;
     private Set<Location> locations;
     private Set<Logins> logins;
-    private String gender;
     private String heading;
-    private String birthDate;
-    private String lifestyle;
-    private String netWorth;
-    private String annualIncome;
-    private String height;
-    private String bodyType;
-    private String ethnicity;
-    private String hairColor;
-    private String occupation;
-    private String education;
-    private String relationship;
-    private String children;
-    private String smoking;
-    private String drinking;
-    private String language;
+    private LocalDate birthDate;
+    private Lifestyle lifestyle;
+    private Worth netWorth;
+    private Income annualIncome;
+    private int height;
+    private BodyType bodyType;
+    private Ethnicity ethnicity;
+    private HairColor hairColor;
+    private Occupation occupation;
+    private Eduation education;
+    private Relationship relationship;
+    private int children;
+    private Smoking smoking;
+    private Dinking drinking;
+    private Language language;
     private Set<Picture> pics;
     private String location;
     private String descrAboutME;
@@ -58,12 +58,12 @@ public class UsersDetails {
         this.user = user;
     }
 
-    public ZonedDateTime getMemeberSince() {
-        return memeberSince;
+    public ZonedDateTime getMemberSince() {
+        return memberSince;
     }
 
-    public void setMemeberSince(ZonedDateTime memeberSince) {
-        this.memeberSince = memeberSince;
+    public void setMemberSince(ZonedDateTime memberSince) {
+        this.memberSince = memberSince;
     }
 
     public ZonedDateTime getLastActive() {
@@ -92,140 +92,12 @@ public class UsersDetails {
         this.logins = logins;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getHeading() {
         return heading;
     }
 
     public void setHeading(String heading) {
         this.heading = heading;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getLifestyle() {
-        return lifestyle;
-    }
-
-    public void setLifestyle(String lifestyle) {
-        this.lifestyle = lifestyle;
-    }
-
-    public String getNetWorth() {
-        return netWorth;
-    }
-
-    public void setNetWorth(String netWorth) {
-        this.netWorth = netWorth;
-    }
-
-    public String getAnnualIncome() {
-        return annualIncome;
-    }
-
-    public void setAnnualIncome(String annualIncome) {
-        this.annualIncome = annualIncome;
-    }
-
-    public String getHeight() {
-        return height;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    public String getBodyType() {
-        return bodyType;
-    }
-
-    public void setBodyType(String bodyType) {
-        this.bodyType = bodyType;
-    }
-
-    public String getEthnicity() {
-        return ethnicity;
-    }
-
-    public void setEthnicity(String ethnicity) {
-        this.ethnicity = ethnicity;
-    }
-
-    public String getHairColor() {
-        return hairColor;
-    }
-
-    public void setHairColor(String hairColor) {
-        this.hairColor = hairColor;
-    }
-
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
-
-    public String getEducation() {
-        return education;
-    }
-
-    public void setEducation(String education) {
-        this.education = education;
-    }
-
-    public String getRelationship() {
-        return relationship;
-    }
-
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
-    }
-
-    public String getChildren() {
-        return children;
-    }
-
-    public void setChildren(String children) {
-        this.children = children;
-    }
-
-    public String getSmoking() {
-        return smoking;
-    }
-
-    public void setSmoking(String smoking) {
-        this.smoking = smoking;
-    }
-
-    public String getDrinking() {
-        return drinking;
-    }
-
-    public void setDrinking(String drinking) {
-        this.drinking = drinking;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
     }
 
     public String getLocation() {
@@ -267,5 +139,125 @@ public class UsersDetails {
 
     public void setPics(Set<Picture> pics) {
         this.pics = pics;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Lifestyle getLifestyle() {
+        return lifestyle;
+    }
+
+    public void setLifestyle(Lifestyle lifestyle) {
+        this.lifestyle = lifestyle;
+    }
+
+    public Worth getNetWorth() {
+        return netWorth;
+    }
+
+    public void setNetWorth(Worth netWorth) {
+        this.netWorth = netWorth;
+    }
+
+    public Income getAnnualIncome() {
+        return annualIncome;
+    }
+
+    public void setAnnualIncome(Income annualIncome) {
+        this.annualIncome = annualIncome;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public BodyType getBodyType() {
+        return bodyType;
+    }
+
+    public void setBodyType(BodyType bodyType) {
+        this.bodyType = bodyType;
+    }
+
+    public Ethnicity getEthnicity() {
+        return ethnicity;
+    }
+
+    public void setEthnicity(Ethnicity ethnicity) {
+        this.ethnicity = ethnicity;
+    }
+
+    public HairColor getHairColor() {
+        return hairColor;
+    }
+
+    public void setHairColor(HairColor hairColor) {
+        this.hairColor = hairColor;
+    }
+
+    public Occupation getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(Occupation occupation) {
+        this.occupation = occupation;
+    }
+
+    public Eduation getEducation() {
+        return education;
+    }
+
+    public void setEducation(Eduation education) {
+        this.education = education;
+    }
+
+    public Relationship getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(Relationship relationship) {
+        this.relationship = relationship;
+    }
+
+    public int getChildren() {
+        return children;
+    }
+
+    public void setChildren(int children) {
+        this.children = children;
+    }
+
+    public Smoking getSmoking() {
+        return smoking;
+    }
+
+    public void setSmoking(Smoking smoking) {
+        this.smoking = smoking;
+    }
+
+    public Dinking getDrinking() {
+        return drinking;
+    }
+
+    public void setDrinking(Dinking drinking) {
+        this.drinking = drinking;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 }

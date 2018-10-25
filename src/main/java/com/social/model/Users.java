@@ -1,5 +1,6 @@
 package com.social.model;
 
+import com.social.enums.Gender;
 import com.social.enums.LifeCycle;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Users {
     private String password;
     private String passwordConfirm;
     private boolean agreedTerms;
+    private Gender gender;
     private Set<Roles> roles;
     private LifeCycle lifecycle;
 
@@ -93,6 +95,14 @@ public class Users {
 
     public boolean isAgreedTerms() {
         return agreedTerms;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public void setAgreedTerms(boolean agreedTerms) {
