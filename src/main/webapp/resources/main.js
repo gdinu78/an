@@ -423,6 +423,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -435,12 +436,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AuthenticationService = /** @class */ (function () {
     function AuthenticationService(http) {
         this.http = http;
     }
     AuthenticationService.prototype.login = function (username, password) {
-        return this.http.post(config.apiUrl + "/users/authenticate", { username: username, password: password })
+        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].appUrl + "/users/authenticate", { username: username, password: password })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (user) {
             // login successful if there's a jwt token in the response
             if (user && user.token) {
@@ -665,6 +667,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -676,12 +679,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var UserService = /** @class */ (function () {
     function UserService(http) {
         this.http = http;
     }
     UserService.prototype.getAll = function () {
-        return this.http.get(config.apiUrl + "/users");
+        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].appUrl + "/users");
     };
     UserService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' }),
@@ -726,8 +730,9 @@ var appRoutes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'category/:name', component: _categories__WEBPACK_IMPORTED_MODULE_2__["CategoriesComponent"], canActivate: [_guards__WEBPACK_IMPORTED_MODULE_4__["AuthGuard"]] },
     { path: 'home', component: _home__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"] },
-    { path: '**', redirectTo: '/home' },
-    { path: 'login', component: _login__WEBPACK_IMPORTED_MODULE_5__["LoginComponent"] }
+    { path: 'login', component: _login__WEBPACK_IMPORTED_MODULE_5__["LoginComponent"] },
+    { path: 'register', component: _login__WEBPACK_IMPORTED_MODULE_5__["LoginComponent"] },
+    { path: '**', redirectTo: '/home' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -1675,7 +1680,8 @@ __webpack_require__.r(__webpack_exports__);
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 var environment = {
-    production: false
+    production: false,
+    appUrl: 'localhost:4200'
 };
 /*
  * In development mode, to ignore zone related error stack frames such as
