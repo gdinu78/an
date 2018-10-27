@@ -10,8 +10,8 @@ import {NavItemModel} from "../_models";
 @Injectable()
 export class NavbarService {
 
-    //private api = 'http://localhost:8080/api/getNavItems';
-    private api = 'assets/data/menu.json';
+    private api = 'http://localhost:8080/api/getNavItems';
+    //private api = 'assets/data/menu.json';
 
     private handleError(error: HttpErrorResponse) {
         if (error.error instanceof ErrorEvent) {

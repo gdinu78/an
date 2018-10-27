@@ -2,6 +2,7 @@ package com.social.model;
 
 import com.social.enums.Gender;
 import com.social.enums.LifeCycle;
+import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -13,13 +14,20 @@ public class Users {
     private int userID;
     private UsersDetails userDetails;
     private UsersDetails supplierDetails;
+    @Column(nullable = false)
     private String username;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String passwordConfirm;
+    @Column(nullable = false)
     private boolean agreedTerms;
+    @Column(nullable = false)
     private Gender gender;
     private Set<Roles> roles;
+    @Column(nullable = false)
     private LifeCycle lifecycle;
 
     @Id
@@ -93,16 +101,16 @@ public class Users {
         this.email = email;
     }
 
-    public boolean isAgreedTerms() {
-        return agreedTerms;
-    }
-
     public Gender getGender() {
         return gender;
     }
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public boolean isAgreedTerms() {
+        return agreedTerms;
     }
 
     public void setAgreedTerms(boolean agreedTerms) {

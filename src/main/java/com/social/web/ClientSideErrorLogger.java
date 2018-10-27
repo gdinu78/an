@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/clientLog")
 public class ClientSideErrorLogger {
 
-    private final Logger log = LoggerFactory.getLogger(ClientSideErrorLogger.class);
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Value("${clientErrorLogSizeLimit}")
     private String clientErrorLogSizeLimit;

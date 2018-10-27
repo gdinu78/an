@@ -10,8 +10,8 @@ import {catchError} from "rxjs/operators";
 @Injectable()
 export class SearchfrmService {
 
-    //private api = 'http://localhost:8080/api/suppliers/search'; - real url
-    private api = 'assets/data/datasource.json'; //- mock url
+    private api = 'http://localhost:8080/api/suppliers/search';
+    //private api = 'assets/data/datasource.json'; //- mock url
     private handleError(error: HttpErrorResponse) {
         if (error.error instanceof ErrorEvent) {
           // A client-side or network error occurred. Handle it accordingly.
@@ -35,26 +35,27 @@ export class SearchfrmService {
         const httpOptions = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         };
-       // return this.http.post<SupplierRespModel>(this.api, sdata, httpOptions) //REAL API CALL
-       //     .pipe(map(data =>{
-       //         if (data.rc !== 0) {
-       //             throw(data.message);
-       //         } else {
-       //             return <SupplierRespModel> data;
-       //         }
-       //     }),
-       //     catchError(this.handleError)
-       //     );
-        return this.http.get<SupplierRespModel>(this.api) //MOCK API CALL
-            .pipe(map(data =>{
-                if (data.rc !== 0) {
-                    throw(data.message);
-                } else {
-                    return <SupplierRespModel> data;
-                }
-            }),
-            catchError(this.handleError)
-            );
+       return this.http.post<SupplierRespModel>(this.api, sdata, httpOptions) //REAL API CALL
+           .pipe(map(data =>{
+               if (data.rc !== 0) {
+                   throw(data.message);
+               } else {
+                   return <SupplierRespModel> data;
+               }
+           }),
+           catchError(this.handleError)
+           );
+
+        // return this.http.get<SupplierRespModel>(this.api) //MOCK API CALL
+        //     .pipe(map(data =>{
+        //         if (data.rc !== 0) {
+        //             throw(data.message);
+        //         } else {
+        //             return <SupplierRespModel> data;
+        //         }
+        //     }),
+        //     catchError(this.handleError)
+        //     );
        }
 
 }

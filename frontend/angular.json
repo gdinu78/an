@@ -17,14 +17,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../src/main/webapp/resources",
+            "outputPath": "../src/main/webapp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/92817_champagne.ico",
-              "src/assets"
+              "src/resources"
             ],
             "styles": [
               {
