@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/themes","/enviroments","/api/**","/test-utils","/assets/**").permitAll()
                 .anyRequest().authenticated()
                 .and().cors().and().csrf()
-                .and()
+                .and() 
                 .formLogin()
                 .loginProcessingUrl("/login-user").permitAll().usernameParameter("username").passwordParameter("password")
                 .defaultSuccessUrl("/home.html")
