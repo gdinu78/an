@@ -41,8 +41,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().cors().and().csrf()
                 .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                .formLogin()
+                .loginProcessingUrl("/login-user").permitAll().usernameParameter("username").passwordParameter("password")
+                .defaultSuccessUrl("/home.html")
+                .and()
+                .rememberMe()
+                .alwaysRemember(true)
+                .tokenValiditySeconds(30*5)
+                .rememberMeCookieName("mouni")
+                .key("somesecret")
+                .and()
+                //.addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                //.addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 // this disables session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
