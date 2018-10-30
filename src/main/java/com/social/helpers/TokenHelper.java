@@ -1,19 +1,26 @@
 package com.social.helpers;
 
 import com.social.model.Users;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 
+import java.io.Serializable;
 import java.security.Key;
 import java.security.KeyFactory;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collection;
 import java.util.Date;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 import io.jsonwebtoken.impl.crypto.MacProvider;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +28,7 @@ import static com.social.constants.SecurityConstants.*;
 
 
 @Component
-public class TokenHelper {
+public class TokenHelper implements Serializable {
 
     protected final Log LOGGER = LogFactory.getLog(getClass());
 
@@ -50,6 +57,10 @@ public class TokenHelper {
             audience = null;
         }
         return audience;
+    }
+
+    public Date getExpirationDateFromToken(String token) {
+        return getClaimFromToken(token, Claims::getExpiration);
     }
 
     public String getUsernameFromToken(String token){
@@ -82,69 +93,79 @@ public class TokenHelper {
         return refreshedToken;
     }
 
-    public String generateToken(String username) {
-        String audience = AUDIENCE.toString();
-        Key key = MacProvider.generateKey(SIGNATURE_ALGORITHM);
-        return Jwts.builder()
-                .setIssuer( APP_NAME )
-                .setSubject(username)
-                .setAudience(audience)
-                .setIssuedAt(new Date())
-                .setExpiration(generateExpirationDate())
-                .signWith( SIGNATURE_ALGORITHM, key)
-                .compact();
+    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = getAllClaimsFromToken(token);
+        return claimsResolver.apply(claims);
     }
 
-
-
     private Claims getAllClaimsFromToken(String token) {
-        Claims claims;
-        Key key = MacProvider.generateKey(SIGNATURE_ALGORITHM);
-        try {
-            claims = Jwts.parser()
-                    .setSigningKey(key)
-                    .parseClaimsJws(token)
-                    .getBody();
-        } catch (Exception e) {
-            LOGGER.error("Could not get all claims Token from passed token");
-            claims = null;
-        }
-        return claims;
+        return Jwts.parser()
+                .setSigningKey(SECRET)
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    private Boolean isTokenExpired(String token) {
+        final Date expiration = getExpirationDateFromToken(token);
+        return expiration.before(new Date());
     }
 
     private Date generateExpirationDate() {
-        return new Date(new Date().getTime() + EXPIRATION_TIME );
+        return new Date(new Date().getTime() + ACCESS_TOKEN_VALIDITY_SECONDS*1000);
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        Users user = (Users) userDetails;
-        final String username = getUsernameFromToken(token);
-        final Date created = getIssuedAtDateFromToken(token);
-        return (
-                username != null &&
-                        username.equals(userDetails.getUsername())
-        );
+    public String generateToken(Authentication authentication) {
+        final String authorities = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
+        return Jwts.builder()
+                .setSubject(authentication.getName())
+                .claim(AUTHORITIES_KEY, authorities)
+                .signWith(SignatureAlgorithm.HS256, SECRET)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS*1000))
+                .compact();
     }
 
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
         return (lastPasswordReset != null && created.before(lastPasswordReset));
     }
 
+    public Boolean validateToken(String token, UserDetails userDetails) {
+        final String username = getUsernameFromToken(token);
+        return (
+                username.equals(userDetails.getUsername())
+                        && !isTokenExpired(token));
+    }
+
     public String getToken( HttpServletRequest request ) {
-        /**
-         *  Getting the token from Authentication header
-         *  e.g Bearer your_token
-         */
         String authHeader = getAuthHeaderFromHeader( request );
         if ( authHeader != null && authHeader.startsWith("Bearer ")) {
             return authHeader.substring(7);
         }
-
         return null;
     }
 
     public String getAuthHeaderFromHeader( HttpServletRequest request ) {
-        return request.getHeader(CSRF_HEADER_STRING);
+        return request.getHeader(HEADER_STRING);
     }
+
+    public UsernamePasswordAuthenticationToken getAuthentication(final String token, final Authentication existingAuth, final UserDetails userDetails) {
+
+        final JwtParser jwtParser = Jwts.parser().setSigningKey(SECRET);
+
+        final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
+
+        final Claims claims = claimsJws.getBody();
+
+        final Collection<? extends GrantedAuthority> authorities =
+                Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
+
+        return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
+    }
+
+
 
 }

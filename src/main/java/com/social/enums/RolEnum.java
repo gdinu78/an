@@ -1,6 +1,7 @@
 package com.social.enums;
 
 public enum RolEnum {
+    ADMIN("Admin"),
     USER("User"),
     SUPPLIER("Supplier");
 

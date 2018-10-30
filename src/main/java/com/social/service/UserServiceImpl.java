@@ -10,8 +10,14 @@ import com.social.repository.PicturesRepository;
 import com.social.repository.RoleRepository;
 import com.social.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -21,12 +27,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service(value = "userService")
+public class UserServiceImpl implements UserDetailsService, UserService {
     @Autowired
     HttpServletRequest request;
     @Autowired
@@ -45,6 +49,22 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles(new HashSet<Roles>(roleRepository.findAll()));
         userRepository.save(user);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Users user = userRepository.findByUsername(username);
+
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        if(user!=null) {
+            for (Roles role : user.getRoles()) {
+                grantedAuthorities.add(new SimpleGrantedAuthority(role.getName().name()));
+            }
+            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        }else{
+            throw new UsernameNotFoundException(username);
+        }
     }
 
     @Override
@@ -75,6 +95,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public Users findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public List findAll() {
+        List list = new ArrayList<>();
+        userRepository.findAll().iterator().forEachRemaining(list::add);
+        return list;
+    }
+
+    private Set<SimpleGrantedAuthority> getAuthority(Users user) {
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        user.getRoles().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority(role.getName().getType()));
+            //authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+        });
+        return authorities;
+        //return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 
     @Override

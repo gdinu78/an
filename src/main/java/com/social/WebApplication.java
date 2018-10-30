@@ -14,12 +14,8 @@ public class WebApplication extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(WebApplication.class);
     }
-
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
     public static void main(String[] args){
         SpringApplication.run(WebApplication.class, args);
     }
+
 }
