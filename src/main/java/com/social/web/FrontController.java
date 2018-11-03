@@ -1,21 +1,28 @@
 package com.social.web;
 
+import com.social.helpers.RespHelper;
 import com.social.model.Menus;
 import com.social.repository.MenuRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 @RestController
 @Controller
 public class FrontController {
     @Autowired
     MenuRepository menuRepository;
+    @Autowired
+    RespHelper respHelper;
 
     @RequestMapping(value="/api/getNavItems")
     public void getNavItems(HttpServletResponse resp) {
@@ -30,16 +37,6 @@ public class FrontController {
             jsonObject = new JSONObject(resMap);
             jsonArray.put(jsonObject);
         }
-        resMap = new HashMap();
-        resMap.put("rc", 0);
-        resMap.put("message", "OK");
-        resMap.put("results",jsonArray);
-        jsonObject = new JSONObject(resMap);
-        try {
-            resp.getWriter().print(jsonObject);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        resp.setContentType("application/json") ;
+        respHelper.sendOk(resp, jsonArray);
     }
 }

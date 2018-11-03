@@ -1,9 +1,11 @@
 package com.social.web;
 
+import com.social.helpers.RespHelper;
 import com.social.helpers.TokenHelper;
 import com.social.model.Users;
 import com.social.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/users")
@@ -31,6 +34,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    RespHelper respHelper;
 
     @PostMapping("/sign-up")
     public void signUp(@RequestBody Users user) {
@@ -38,8 +43,8 @@ public class UserController {
         userService.save(user);
     }
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<?> login(@RequestBody Users loginUser) throws AuthenticationException {
+    @PostMapping(path="/authenticate")
+    public void login(@RequestBody Users loginUser, HttpServletResponse resp) throws AuthenticationException {
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginUser.getUsername(),
@@ -48,6 +53,6 @@ public class UserController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = tokenHelper.generateToken(authentication);
-        return ResponseEntity.ok(token);
+        respHelper.sendOk(resp, token);
     }
 }

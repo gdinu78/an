@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError, map} from 'rxjs/operators';
 import {environment} from "../../environments/environment";
 import {User} from "../_models";
@@ -10,10 +10,18 @@ export class AuthenticationService {
     constructor(private http: HttpClient) { }
 
     login(username: string, password: string) {
-        return this.http.post<User>(`${environment.appUrl}/users/authenticate`, { username, password })
-            .pipe(map(token => {
-                    sessionStorage.setItem('currentUser', JSON.stringify(token));
-                return token;
+        const httpOptions = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        };
+        return this.http.post<any>('http://localhost:8080/users/authenticate',
+            {username: username, password: password} ,httpOptions)
+            .pipe(map(data => {
+                    if (data.rc !== 0) {
+                        throw(data.message);
+                    } else {
+                        sessionStorage.setItem('currentUser', data.results);
+                        return data;
+                    }
             }),
             catchError(this.handleError)
     );
