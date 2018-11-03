@@ -11,7 +11,6 @@ public class Roles {
     private int id;
     private RolEnum roleName;
     private Set<Users> users;
-    private Set<Permissions> permissions;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,14 +22,7 @@ public class Roles {
         this.id = id;
     }
 
-    public RolEnum getName() {
-        return roleName;
-    }
-
-    public void setName(RolEnum name) {
-        this.roleName = name;
-    }
-
+    @Enumerated(value = EnumType.STRING)
     public RolEnum getRoleName() {
         return roleName;
     }
@@ -48,12 +40,4 @@ public class Roles {
         this.users = users;
     }
 
-    @OneToMany(mappedBy = "role")
-    public Set<Permissions> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(Set<Permissions> permissions) {
-        this.permissions = permissions;
-    }
 }

@@ -1,13 +1,13 @@
 package com.social.enums;
 
-public enum PermissionsEnum {
-    LOW("Low"),
-    AVERAGE("Average"),
-    HIGH("High");
+public enum Permission {
+    ADMIN("Admin"),
+    USER("User"),
+    GOLD("Gold");
 
     private String type;
 
-    PermissionsEnum(String type) {
+    Permission(String type) {
         this.type = type;
     }
 

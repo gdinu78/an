@@ -2,10 +2,8 @@ package com.social.model;
 
 import com.social.enums.Gender;
 import com.social.enums.LifeCycle;
-import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
-import java.time.ZonedDateTime;
 import java.util.Set;
 
 @Entity
@@ -101,6 +99,7 @@ public class Users {
         this.email = email;
     }
 
+    @Enumerated(value = EnumType.STRING)
     public Gender getGender() {
         return gender;
     }
@@ -117,6 +116,7 @@ public class Users {
         this.agreedTerms = agreedTerms;
     }
 
+    @Enumerated(value = EnumType.STRING)
     public LifeCycle getLifecycle() {
         return lifecycle;
     }

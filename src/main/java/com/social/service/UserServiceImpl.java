@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         if(user!=null) {
             for (Roles role : user.getRoles()) {
-                grantedAuthorities.add(new SimpleGrantedAuthority(role.getName().name()));
+                grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName().name()));
             }
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
         }else{
@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     private Set<SimpleGrantedAuthority> getAuthority(Users user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getName().getType()));
+            authorities.add(new SimpleGrantedAuthority(role.getRoleName().getType()));
             //authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
         });
         return authorities;

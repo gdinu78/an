@@ -6,6 +6,7 @@ import com.social.service.DataService;
 import com.social.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,7 @@ public class SuppliersController {
     @Autowired
     RespHelper respHelper;
 
+    @PreAuthorize("hasRole('Admin')")
     @RequestMapping(path="/search",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public void signUp(@RequestBody SuppliersDetails supplier, HttpServletResponse resp) {
         List<SuppliersDetails> resList = dataService.getSuppliersByModel(supplier);
