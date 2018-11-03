@@ -9,6 +9,7 @@ public class SecurityConstants {
     public static final String AUTHORITIES_KEY = "scopes";
     public static final String SIGN_UP_URL = "/users/authenticate";
     public static final String RESOURCES_URL = "/resources/**";
+    public static final String NAVITEMS_URL = "/getNavItems";
     public static final String LANDINGPAGE_URL = "/";
     public static final String HOME_URL = "/home";
     public static final String REGISTER_URL = "/register";

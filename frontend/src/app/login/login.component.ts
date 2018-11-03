@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
 
-import { AuthenticationService } from '../_services';
-import {NavItemModel} from "../_models";
+import { BackendService } from '../_services';
+import {User} from "../_models";
 
 @Component({templateUrl: 'login.component.html'})
 export class LoginComponent implements OnInit {
@@ -18,7 +17,7 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService) {}
+        private backendService: BackendService) {}
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
@@ -27,7 +26,7 @@ export class LoginComponent implements OnInit {
         });
 
         // reset login status
-        this.authenticationService.logout();
+        sessionStorage.removeItem('currentUser');
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -45,9 +44,11 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
+        //var bar: User = {username: this.f.username.value, password: this.f.password.value};
+        this.backendService.postResults('/users/authenticate',{username: this.f.username.value, password: this.f.password.value})
             .subscribe(
                 data => {
+                    sessionStorage.setItem('currentUser', data);
                     this.router.navigate(['/home']);
                 },
                 error => {

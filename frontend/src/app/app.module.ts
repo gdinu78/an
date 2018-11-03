@@ -23,6 +23,7 @@ import { LoginComponent } from './login';
 import {fakeBackendProvider} from "./_helpers/fake-backend";
 import {ErrorInterceptor} from "./_helpers";
 import {JwtInterceptor} from "./_helpers";
+import {BackendService} from "./_services";
 
 
 @NgModule({
@@ -65,7 +66,7 @@ import {JwtInterceptor} from "./_helpers";
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
+    BackendService
     // provider used to create fake backend
     //fakeBackendProvider
 ],

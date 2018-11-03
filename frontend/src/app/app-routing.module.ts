@@ -7,8 +7,7 @@ import {LoginComponent} from "./login";
 
 const appRoutes: Routes =[
 
-    { path: '', redirectTo: '/home', pathMatch: 'full'},
-    { path: 'category/:name', component: CategoriesComponent, canActivate:[AuthGuard] },
+    { path: 'category/:name', component: CategoriesComponent, canActivate:[AuthGuard]},
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: LoginComponent },

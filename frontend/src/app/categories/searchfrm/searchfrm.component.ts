@@ -1,13 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {SupplierModel} from "../../_models/supplier.model";
-import {SearchfrmService} from "../../_services/searchfrm.service";
 import {SupplierRespModel} from "../../_models/supplierResp.model";
+import {BackendService} from "../../_services";
 
 @Component({
   selector: 'app-searchfrm',
   templateUrl: './searchfrm.component.html',
-  styleUrls: ['./searchfrm.component.scss'],
-  providers: [SearchfrmService]
+  styleUrls: ['./searchfrm.component.scss']
 })
 export class SearchfrmComponent{
     @Output() searchDone=new EventEmitter();
@@ -16,7 +15,7 @@ export class SearchfrmComponent{
     sdataArrCount:number;
     @Input() s_category:string;
 
-  constructor(private searchfrmService: SearchfrmService){
+  constructor(private backendService: BackendService){
       this.sdata={
           type:this.s_category,
           name: null,
@@ -45,7 +44,7 @@ export class SearchfrmComponent{
     }
 
     onSubmit():void{
-        this.searchfrmService.getSearchResults(this.sdata)
+        this.backendService.postResults('/suppliers/search',this.sdata)
             .subscribe((data : SupplierRespModel)=>{
             this.sdataArr=data.results;
             this.sdataArrCount=data.count;

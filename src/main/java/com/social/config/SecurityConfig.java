@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable()
                 .authorizeRequests().antMatchers(LANDINGPAGE_URL,ANGULAR_MAIN, ANGULAR_POLYFILLS, ANGULAR_RUNTIME,
                         ANGULAR_SCRIPTS, ANGULAR_STYLES, ANGULAR_VENDOR, SIGN_UP_URL, HOME_URL,
-                        RESOURCES_URL, WELCOME_URL,RESOURCES_URL,LOGIN_URL,SERVICES_ROOT_URL).permitAll()
+                        RESOURCES_URL, WELCOME_URL,RESOURCES_URL,LOGIN_URL,SERVICES_ROOT_URL,NAVITEMS_URL).permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

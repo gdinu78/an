@@ -1,9 +1,9 @@
 import {NavItemModel} from "./navitem.model";
 
 
-export interface NavitemRespModel {
+export interface ServRespModel {
     rc: number;
     message: string;
     count:number;
-    results: NavItemModel[];
+    results: any;
 }

@@ -1,5 +1,6 @@
 package com.social.web;
 
+import com.social.helpers.RespHelper;
 import com.social.model.SuppliersDetails;
 import com.social.service.DataService;
 import com.social.repository.SupplierRepository;
@@ -8,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,16 +23,16 @@ public class SuppliersController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     DataService dataService;
+    @Autowired
+    RespHelper respHelper;
 
     @RequestMapping(path="/search",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String,Object> signUp(@RequestBody SuppliersDetails supplier) {
+    public void signUp(@RequestBody SuppliersDetails supplier, HttpServletResponse resp) {
         List<SuppliersDetails> resList = dataService.getSuppliersByModel(supplier);
         Map result=new HashMap<String,Object>();
         resList.add(supplier);
-        result.put("rc",0);
-        result.put("message","OK");
         result.put("count",resList.size());
         result.put("results",resList);
-       return result;
+        respHelper.sendOk(resp, result);
     }
 }

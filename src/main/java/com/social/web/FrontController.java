@@ -24,7 +24,7 @@ public class FrontController {
     @Autowired
     RespHelper respHelper;
 
-    @RequestMapping(value="/api/getNavItems")
+    @RequestMapping(value="/getNavItems")
     public void getNavItems(HttpServletResponse resp) {
         List<Menus> menus = menuRepository.fetchByType("header");
         JSONArray jsonArray = new JSONArray();

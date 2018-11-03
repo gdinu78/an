@@ -1,31 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { NavItemModel } from '../_models';
-import { NavbarService } from '../_services';
+import {BackendService} from '../_services';
 
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
-  providers: [NavbarService]
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   private flag = false;
   private navItems: NavItemModel[] = [];
-  private navItemsExtra: NavItemModel[] = [];
 
-
-  constructor(private navbarService: NavbarService) { }
+  constructor(private backendService: BackendService) { }
 
   ngOnInit() {
-    // this.navItems = this.navbarService.getNavItems();
-    this.navbarService.getNavItems()
+    this.backendService.getResults("/getNavItems")
         .subscribe(
             (data: NavItemModel[]) => {
                 data.map((val, index) => {
                     this.navItems.push({name: val.name, priority: val.priority});
                 })
-
             },
             (error) => {
                 console.log('am eroarea: ', error);
