@@ -8,13 +8,13 @@ import {throwError} from "rxjs";
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     constructor(private http: HttpClient) { }
+    private api = '${environment.appUrl}/users/authenticate';
 
     login(username: string, password: string) {
         const httpOptions = {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         };
-        return this.http.post<any>('http://localhost:8080/users/authenticate',
-            {username: username, password: password} ,httpOptions)
+        return this.http.post<any>(this.api,{username: username, password: password} ,httpOptions)
             .pipe(map(data => {
                     if (data.rc !== 0) {
                         throw(data.message);

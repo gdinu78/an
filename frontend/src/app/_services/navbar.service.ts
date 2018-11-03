@@ -10,8 +10,22 @@ import {NavItemModel} from "../_models";
 @Injectable()
 export class NavbarService {
 
-    private api = 'http://localhost:8080/api/getNavItems';
-    //private api = 'assets/data/menu.json';
+    constructor(private http: HttpClient) {}
+    private api = '${environment.appUrl}/getNavItems';
+
+    getNavItems() {
+       return this.http.get<NavitemRespModel>(this.api).pipe(map((data) => {
+                if (data.rc !== 0) {
+                    throw(data.message);
+                } else {
+                    return <NavItemModel[]> data.results;
+                }
+            }
+        ),
+        catchError(this.handleError)
+        )
+    }
+
 
     private handleError(error: HttpErrorResponse) {
         if (error.error instanceof ErrorEvent) {
@@ -28,28 +42,5 @@ export class NavbarService {
         return throwError(
             'Something bad happened; please try again later.');
     };
-
-
-    constructor(private http: HttpClient) {}
-
-    // in getNavItems trebuie sa returneze maxim 4 elemente in functie de priority
-    // cumva trebuie sa duc celelalte elemente intr-o alta componenta (copilul lui  nav-item)
-    getNavItems() {
-        
-       return this.http.get<NavitemRespModel>(this.api)
-        .pipe(map((data) => {
-                if (data.rc !== 0) {
-                    throw(data.message);
-                } else {
-                    return <NavItemModel[]> data.results;
-                }
-                
-            }
-        ),
-        catchError(this.handleError)
-        )
-       
-        
-    }
 
 }
