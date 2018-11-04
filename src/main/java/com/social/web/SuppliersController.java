@@ -27,7 +27,7 @@ public class SuppliersController {
     @Autowired
     RespHelper respHelper;
 
-    @PreAuthorize("hasRole('Admin')")
+
     @RequestMapping(path="/search",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public void signUp(@RequestBody SuppliersDetails supplier, HttpServletResponse resp) {
         List<SuppliersDetails> resList = dataService.getSuppliersByModel(supplier);

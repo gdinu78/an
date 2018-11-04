@@ -22,7 +22,6 @@ public class Roles {
         this.id = id;
     }
 
-    @Enumerated(value = EnumType.STRING)
     public RolEnum getRoleName() {
         return roleName;
     }

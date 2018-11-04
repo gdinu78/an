@@ -37,7 +37,7 @@ public class UserController {
     @Autowired
     RespHelper respHelper;
 
-    @PostMapping("/sign-up")
+    @PostMapping("/signup")
     public void signUp(@RequestBody Users user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userService.save(user);

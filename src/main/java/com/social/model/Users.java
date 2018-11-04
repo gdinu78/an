@@ -99,7 +99,6 @@ public class Users {
         this.email = email;
     }
 
-    @Enumerated(value = EnumType.STRING)
     public Gender getGender() {
         return gender;
     }
@@ -116,7 +115,6 @@ public class Users {
         this.agreedTerms = agreedTerms;
     }
 
-    @Enumerated(value = EnumType.STRING)
     public LifeCycle getLifecycle() {
         return lifecycle;
     }
